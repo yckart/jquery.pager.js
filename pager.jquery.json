@@ -1,0 +1,34 @@
+{
+    "name": "pager",
+    "title": "jQuery Pager",
+    "description": "An event-driven pagination plugin for jQuery and you.",
+    "keywords": [
+        "pager",
+        "pagify",
+        "paging",
+        "paginate",
+        "pagination",
+        "event",
+        "events",
+        "yckart",
+        "yannick",
+        "albert"
+    ],
+    "version": "0.0.1",
+    "author": {
+        "name": "Yannick Albert",
+        "email": "mail@yckart.com",
+        "url": "https://github.com/yckart"
+    },
+    "licenses": [{
+        "type": "MIT",
+        "url": "http://yckart.com/mit/"
+    }],
+    "homepage": "http://yckart.github.com/jquery.pager.js",
+    "demo": "http://yckart.github.com/jquery.pager.js",
+    "docs": "https://github.com/yckart/jquery.pager.js",
+    "bugs": "https://github.com/yckart/jquery.pager.js/issues",
+    "dependencies": {
+        "jquery": ">=1.4"
+    }
+}

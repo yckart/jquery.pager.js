@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width'>
+
+    <link href='http://fonts.googleapis.com/css?family=Sanchez' rel='stylesheet'>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+    </style>
+
+    <title>jquery.pager.js | An event-driven pagination plugin for jQuery and you</title>
+</head>
+
+<body>
+    <h1>An event-driven pagination plugin for jQuery and you</h1>
+
+    <div class="example">
+         <h2>Basic example</h2>
+
+        <p>
+            <a class="prev" href="#">prev</a>
+            (<span id="count"></span> / <span id="total"></span>)
+            <a class="next" href="#">next</a>
+        </p>
+        <ul id="wrapper" class="wrapper">
+            <li>one</li>
+            <li>two</li>
+            <li>three</li>
+            <li>four</li>
+            <li>five</li>
+            <li>six</li>
+            <li>seven</li>
+            <li>eight</li>
+            <li>nine</li>
+            <li>ten</li>
+        </ul>
+    </div>
+
+    <div class="example">
+         <h2>Looping &amp; more features</h2>
+
+        <p>
+            <a class="action" href="#" rel="first">first</a> | <a class="action" href="#" rel="prev">prev</a>
+            (<span id="count2"></span> / <span id="total2"></span>)
+            <a class="action" href="#" rel="next">next</a>| <a class="action" href="#" rel="last">last</a> | show :
+            <select name="perpage">
+                <option value="1">1 per page</option>
+                <option value="3">3 per page</option>
+                <option value="5">5 per page</option>
+            </select>
+        </p>
+        <ul id="wrapper2" class="wrapper">
+            <li>one</li>
+            <li>two</li>
+            <li>three</li>
+            <li>four</li>
+            <li>five</li>
+            <li>six</li>
+            <li>seven</li>
+            <li>eight</li>
+            <li>nine</li>
+            <li>ten</li>
+            <li>eleven</li>
+            <li>twelve</li>
+            <li>thirteen</li>
+            <li>fourteen</li>
+            <li>fifteen</li>
+        </ul>
+    </div>
+
+    <div class="example">
+        <h2>Quick image example</h2>
+
+        <div id="images">
+            <img src="http://lorempixel.com/200/130/sports/1/" alt="Demo1">
+            <img src="http://lorempixel.com/200/130/sports/2/" alt="Demo2">
+            <img src="http://lorempixel.com/200/130/sports/3/" alt="Demo3">
+        </div>
+        <p>
+            <a class="action2" href="#" rel="first">first</a>
+            <a class="action2" href="#" rel="prev">prev</a>
+            <a class="action2" href="#" rel="next">next</a>
+            <a class="action2" href="#" rel="last">last</a>
+        </p>
+    </div>
+
+
+    <script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
+    <script src='jquery.pager.js'></script>
+    <script>
+        $(function () {
+
+            /* EXAMPLE 1
+            ============ */
+            var wrap = $('#wrapper');
+
+            wrap.pager({
+                perPage: 2,
+                useHash: true,
+                init: function (startnum, totalnum) {
+                    $('#count').text(startnum);
+                    $('#total').text(totalnum);
+                }
+            });
+
+            // set up click events to trigger the pagination plugins' behaviour
+            $('.prev').click(function () {
+                wrap.trigger('pager:prev');
+                return false;
+            });
+
+            $('.next').click(function () {
+                wrap.trigger('pager:next');
+                return false;
+            });
+
+            // listen out for events triggered by the plugin to update the counter
+            wrap.bind('pager:finished', function (e, num, isFirst, isLast) {
+                $('#count').text(num);
+            });
+
+
+
+            /* EXAMPLE 2
+            ============= */
+            var wrap2 = $('#wrapper2');
+
+            wrap2.pager({
+                perPage: 4,
+                infinite: true,
+
+                init: function (startnum, totalnum) {
+                    $('#count2').text(startnum);
+                    $('#total2').text(totalnum);
+                }
+            });
+
+            $('.action').click(function () {
+                var action = $(this).attr('rel'); // get the appropriate action from the rel attribute
+                wrap2.trigger("pager:" + action);
+                return false;
+            });
+
+            $('select[name=perpage]').change(function () {
+                wrap2.trigger('pager:refresh', {
+                    perPage: this.value
+                });
+                return false;
+            });
+
+            // listen out for events triggered by the plugin to update the counter
+            wrap2.bind('pager:finished', function (e, num, isFirst, isLast) {
+                $('#count2').text(num);
+            });
+
+
+
+
+            /* EXAMPLE 3
+            ============ */
+            var imgs = $('#images');
+
+            imgs.pager({
+                perPage: 1,
+                useHash: true
+            });
+
+            $('.action2').click(function () {
+                var action = this.getAttribute('rel'); // get the appropriate action from the rel attribute
+                imgs.trigger("pager:" + action);
+                return false;
+            });
+        });
+    </script>
+</body>
+</html>
