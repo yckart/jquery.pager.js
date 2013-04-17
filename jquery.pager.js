@@ -69,7 +69,7 @@
 
     function setUp(options) {
         options.uuid = options.uuid + uuid++;
-        options.perPage = parseInt(options.perPage);
+        options.perPage = parseInt(options.perPage) || 1;
         options.items = options.wrapper.children();
         options.totalItems = options.items.length;
         options.totalPages = Math.ceil(options.totalItems / options.perPage);
