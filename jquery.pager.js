@@ -55,8 +55,9 @@
                     var hash = location.hash;
                     if(!hash) return show(options, options.startPage-1, e);
 
-                    if( options.uuid === hash.slice(0, hash.lastIndexOf(":")).replace("#", "") ) {
-                        show(options, hash.slice(-1) -1, e);
+                    var colon_position = hash.lastIndexOf(":");
+                    if( options.uuid === hash.slice(0, colon_position).replace("#", "") ) {
+                        show(options, hash.slice(colon_position + 1) -1, e);
                     } else {
                         show(options, options.currentPage, e);
                     }
