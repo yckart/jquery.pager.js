@@ -86,7 +86,11 @@
             options.pages[i] = options.items.slice(startItem, (startItem + options.perPage));
         }
 
-        $(window).trigger("hashchange.pager");
+        if (options.useHash) {
+            $(window).trigger("hashchange.pager");
+        } else {
+            show(options, options.startPage-1);
+        }
         options.init.call(this, options.currentPage + 1, options.totalPages);
     }
 
